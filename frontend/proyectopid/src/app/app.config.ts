@@ -5,6 +5,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideHttpClient , withFetch} from '@angular/common/http'; 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 import Aura from '@primeuix/themes/aura';
 
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
+    provideCharts(withDefaultRegisterables()),
     providePrimeNG({
       theme:{ preset: Aura,
               options: {

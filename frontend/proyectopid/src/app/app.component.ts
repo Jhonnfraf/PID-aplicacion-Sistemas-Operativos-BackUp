@@ -8,11 +8,12 @@ import { PrimeNG } from 'primeng/config';
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [CommonModule, RouterOutlet, BodyComponent, HeaderComponent, FooterComponent],
+  imports: [CommonModule, RouterOutlet, BodyComponent, HeaderComponent, FooterComponent,],
   standalone: true
 })
 

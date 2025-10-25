@@ -48,11 +48,7 @@ export class BodyComponent implements OnInit {
   }
 
   //logica para asignar nuevo PID
-  asignarNuevoPid(): number {
-    const procesos = this.staticDataService.getProcesos();
-    const maxPid = procesos.reduce((max, p) => p.pid > max ? p.pid : max, 0);
-    return maxPid + 1;
-  }
+  
 
   //metodo para agregar proceso
   
@@ -102,7 +98,7 @@ export class BodyComponent implements OnInit {
 
   addProceso(proceso: Proceso) {
     if (this.validacionesProceso(proceso)) {
-      proceso.pid = this.asignarNuevoPid();
+      proceso.pid = this.staticDataService.asignarNuevoPid();
       this.staticDataService.addProceso(proceso);
       console.log("Proceso agregado:", proceso);
       this.closeAddProcesoNuevo();
