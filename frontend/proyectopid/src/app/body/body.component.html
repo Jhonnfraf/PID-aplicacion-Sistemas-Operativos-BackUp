@@ -1,0 +1,317 @@
+<!-- Body component content -->
+<div class="body-container">
+    <div class="body-container-left">
+        <h2>Tabla de procesos</h2>
+        
+    <h3 class="titulo-ejecutando">Procesos Ejecutando</h3>
+    <table class="process-table">
+        <thead>
+            <tr>
+            <th>PID</th>
+            <th>Programa</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+            <th>Quantum</th>
+            <th>Tiempo (ms)</th>
+            </tr>
+        </thead>
+    
+    <!-- 🟢 Ejecutando -->
+        <tbody>  
+            <tr *ngFor="let proceso of getProcesosPorEstado('ejecutando')"
+            (click)="seleccionarProceso(proceso)">
+            <td>{{ proceso.pid }}</td>
+            <td>{{ proceso.nombre }}</td>
+            <td><span class="status-badge status-{{proceso.estado}}">{{ proceso.estado }}</span></td>
+            <td><span class="priority-badge priority-{{proceso.prioridad}}">{{ proceso.prioridad }}</span></td>
+            <td>{{ proceso.quantum }}ms</td>
+            <td>{{ proceso.tiempoEjecucion }}ms</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <!-- 🟡 Listo -->
+    <h3 class="titulo-listo">Procesos Espera</h3>
+    <table class="process-table">
+    
+    <tbody>
+        <tr *ngFor="let proceso of getProcesosPorEstado('listo')" (click)="seleccionarProceso(proceso)">
+        <td>{{ proceso.pid }}</td>
+        <td>{{ proceso.nombre }}</td>
+        <td><span class="status-badge status-{{proceso.estado}}">{{ proceso.estado }}</span></td>
+        <td><span class="priority-badge priority-{{proceso.prioridad}}">{{ proceso.prioridad }}</span></td>
+        <td>{{ proceso.quantum }}ms</td>
+        <td>{{ proceso.tiempoEjecucion }}ms</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <br>
+
+    <!-- 🔴 Bloqueado -->
+    <h3 class="titulo-bloqueado">Procesos Suspendido</h3>
+    <table class="process-table">
+    
+    <tbody>
+        <tr *ngFor="let proceso of getProcesosPorEstado('bloqueado')" (click)="seleccionarProceso(proceso)">
+        <td>{{ proceso.pid }}</td>
+        <td>{{ proceso.nombre }}</td>
+        <td><span class="status-badge status-{{proceso.estado}}">{{ proceso.estado }}</span></td>
+        <td><span class="priority-badge priority-{{proceso.prioridad}}">{{ proceso.prioridad }}</span></td>
+        <td>{{ proceso.quantum }}ms</td>
+        <td>{{ proceso.tiempoEjecucion }}ms</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <h3 class="titulo-bloqueado" style="padding-top: 25px;">Procesos Inactivos</h3>
+    <table class="process-table">
+        <tbody>
+            <tr *ngFor="let proceso of getProcesosPorEstado('inactivo')" (click)="seleccionarProceso(proceso)">
+            <td>{{ proceso.pid }}</td>
+            <td>{{ proceso.nombre }}</td>
+            <td><span class="status-badge status-{{proceso.estado}}">{{ proceso.estado }}</span></td>
+            <td><span class="priority-badge priority-{{proceso.prioridad}}">{{ proceso.prioridad }}</span></td>
+            <td>{{ proceso.quantum }}ms</td>
+            <td>{{ proceso.tiempoEjecucion }}ms</td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div>
+    <div class="body-container-center">
+        <h2>Uso de Recursos en Tiempo Real</h2>
+        
+        <!-- Contenido Sistema -->
+        <div class="content-area" *ngIf="centerActiveTab === 'sistema'">
+            <div class="sistema-content">
+                <p>Mostrando uso de recursos del sistema</p>
+                <div class="system-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">CPU Total:</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="stat-value">0.0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Memoria Total:</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="stat-value">0.0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="body-container-right">
+        <!-- Contenido Básico -->
+        <div>
+            <h2>Controles de Simulación</h2>
+            <div class="control-buttons">
+                <button class="control-btn start-btn">
+                    <span class="btn-icon">▶</span>
+                    Iniciar
+                </button>
+                <button class="control-btn stop-btn">
+                    <span class="btn-icon">⏹</span>
+                    Detener
+                </button>
+                <button class="control-btn add-btn" (click)="OpenAddProcesoNuevo()">
+                    <span class="btn-icon">+</span>
+                    Agregar
+                </button>
+            </div>
+            <div *ngIf="procesoSeleccionado" class="proceso-detalles-panel">
+                <h3>Detalles del proceso: {{procesoSeleccionado.nombre}}</h3>
+                <div class="detail-item">
+                    <label for="">PID</label>
+                    <input type="text" [value]="procesoSeleccionado.pid" readonly />
+                </div>
+                <div class="detail-item">
+                    <label for="">Estado</label>
+                    <input type="text" [value]="procesoSeleccionado.estado" readonly />
+                </div>
+                <div class="detail-item">
+                    <label for="">Prioridad</label>
+                    <input type="text" [value]="procesoSeleccionado.prioridad" readonly />
+                </div>
+                <div class="detail-item">
+                    <label for="">Quantum (ms)</label>
+                    <input type="text" [value]="procesoSeleccionado.quantum" readonly />
+                </div>
+                <div class="detail-item">
+                    <label for="">Tiempo de Ejecución (ms)</label>
+                    <input type="text" [value]="procesoSeleccionado.tiempoEjecucion" readonly />
+                </div>
+                <div class="detail-item">
+                    <label>Tiempo Llegada (ms)</label>
+                    <input type="text" [value]="procesoSeleccionado.tiempoLlegada + 'ms'" readonly>
+                </div>
+                <div class="detail-item">
+                    <label>Uso CPU (%)</label>
+                    <input type="text" [value]="procesoSeleccionado.usoCPU + '%'" readonly>
+                </div>
+                <div class="detail-item">
+                    <label>Uso Memoria (%)</label>
+                    <input type="text" [value]="procesoSeleccionado.usoMemoria + '%'" readonly>
+                </div>
+                <div class="detail-actions">
+                    <button class="control-btn" (click)="abrirCambiarEstado()">
+                        <span class="btn-icon">✎</span> Cambiar Estado
+                    </button>
+
+                    <!--Elemento para cambiar estado -->
+                    <div class="modal-backdrop" *ngIf="showCambiarEstado">
+                        <div class="modal-content">
+                            <div class="modal-element">
+                                <span class="btn-icon">✎</span> Cambiar Estado
+                                <select name="estadoCambio"  [(ngModel)]="estadoSeleccionado">
+                                    <option value="listo">preparado</option>
+                                    <option value="bloqueado">suspendido</option>
+                                    <option value="ejecutando">ejecucion</option>
+                                    <option value="inactivo">inactivo</option>
+                                </select>
+                            </div>
+                            <div class="modal-actions">
+                                <button (click)="cerrarCambiarEstado()" class="control-btn stop-btn">Cancelar</button>
+                                <button (click)="cambiarEstado(procesoSeleccionado.pid)" class="control-btn start-btn">Guardar Cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <button class="control-btn stop-btn" (click)="eliminarProceso(procesoSeleccionado.pid)">
+                        <span class="btn-icon">✖</span> Eliminar Proceso
+                    </button>
+                    <button class="control-btn" (click)="cerrarPanelDetalles()">
+                    Cerrar Detalles
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- Modal para agregar proceso -->
+ <div *ngIf="showAddProcesoNuevo" class="modal-backdrop">
+    <div class="modal-content">
+    <h2>Agregar Nuevo Proceso</h2>
+
+    <div *ngIf="validationError" class="validation-error">
+        <p>⚠️ Error de Validación:</p>
+        <p>{{ validationError }}</p>
+    </div>
+
+    <!-- Nombre -->
+    <div class="modal-element">
+    <label>Nombre del Programa</label>
+    <input
+        type="text"
+        [(ngModel)]="nuevoProceso.nombre"
+        placeholder="ej: firefox, vscode, etc."
+        name="nombre"
+    />
+    </div>
+
+    <!-- Estado -->
+    <div class="modal-element">
+    <label>Estado</label>
+    <select [(ngModel)]="nuevoProceso.estado" name="estado">
+        <option value="">Selecciona un estado</option>
+        <option value="listo">preparado</option>
+        <option value="bloqueado">suspendido</option>
+        <option value="ejecutando">ejecucion</option>
+        <option value="inactivo">inactivo</option>
+    </select>
+    </div>
+
+    <!-- Prioridad -->
+    <div class="modal-element">
+    <label>Prioridad</label>
+    <input
+        type="number"
+        [(ngModel)]="nuevoProceso.prioridad"
+        placeholder="Entre -20 y 19"
+        min="-20"
+        max="19"
+        name="prioridad"
+    />
+    </div>
+
+    <!-- Quantum -->
+    <div class="modal-element">
+    <label>Quantum (ms)</label>
+    <input
+        type="number"
+        [(ngModel)]="nuevoProceso.quantum"
+        placeholder="ej: 50"
+        min="1"
+        max="100"
+        name="quantum"
+    />
+    </div>
+
+    <!-- Tiempo de llegada -->
+    <div class="modal-element">
+    <label>Tiempo de llegada (ms)</label>
+    <input
+        type="number"
+        [(ngModel)]="nuevoProceso.tiempoLlegada"
+        placeholder="ej: 0"
+        min="0"
+        name="tiempoLlegada"
+    />
+    </div>
+
+    <!-- Tiempo de Ejecucion (Burst Time) -->
+    <div class="modal-element">
+        <label>Tiempo de Ráfaga (Ejecución, ms)</label>
+        <input
+            type="number"
+            [(ngModel)]="nuevoProceso.tiempoEjecucion"
+            placeholder="Mínimo 1ms"
+            min="1"
+            name="tiempoEjecucion"
+        />
+    </div>
+
+    <!-- Uso CPU -->
+    <div class="modal-element">
+    <label>Uso CPU estimado (%)</label>
+    <input
+        type="number"
+        [(ngModel)]="nuevoProceso.usoCPU"
+        placeholder="0 - 100"
+        min="0"
+        max="100"
+        name="usoCPU"
+    />
+    </div>
+
+    <!-- Uso Memoria -->
+    <div class="modal-element">
+    <label>Uso memoria estimado (%)</label>
+    <input
+        type="number"
+        [(ngModel)]="nuevoProceso.usoMemoria"
+        placeholder="0 - 100"
+        min="0"
+        max="100"
+        name="usoMemoria"
+    />
+    </div>
+
+
+    <!-- Botones -->
+    <div class="modal-actions">
+      <button (click)="closeAddProcesoNuevo()" class="control-btn stop-btn">Cancelar</button>
+      <button (click)="addProceso(nuevoProceso)" class="control-btn start-btn">Agregar Proceso</button>
+    </div>
+  </div>
+ </div>

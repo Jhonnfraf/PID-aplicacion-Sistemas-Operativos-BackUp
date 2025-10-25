@@ -1,0 +1,13 @@
+# Python
+backend/venv/
+__pycache__/
+*.pyc
+
+# Node/Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Editor/IDE
+.vscode/
+.idea/

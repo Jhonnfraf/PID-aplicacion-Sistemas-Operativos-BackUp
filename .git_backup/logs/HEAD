@@ -1,0 +1,14 @@
+0000000000000000000000000000000000000000 0dc6397ffc223189fe0672f9e325df49aa1fb687 Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1758859305 -0500	clone: from https://github.com/Jhonnfraf/PID-aplicacion-Sistemas-Operativos.git
+0dc6397ffc223189fe0672f9e325df49aa1fb687 43f318986c6ed97f4d5cadecac9922f6fe888e45 Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1758859539 -0500	commit: "Añadir .gitignore inicial"
+43f318986c6ed97f4d5cadecac9922f6fe888e45 ae46524f60a552b8476f2a395482bd70d02c525d Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1758862583 -0500	commit: "Añadir. Carpeta backend y frontend y api python y angular"
+ae46524f60a552b8476f2a395482bd70d02c525d 76cdac1a21855fcfd80baafd48890a2ca0c9f62f Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1759198765 -0500	commit: "Agregando componentes prueba"
+76cdac1a21855fcfd80baafd48890a2ca0c9f62f ae46524f60a552b8476f2a395482bd70d02c525d Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1759198781 -0500	checkout: moving from main to FastApi-Try
+ae46524f60a552b8476f2a395482bd70d02c525d 1811884719d1fde8ac3d0a29131cf28e1d49cc15 Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1759198909 -0500	commit: "Borrando carpeta frontend para trabajar con FastApi"
+1811884719d1fde8ac3d0a29131cf28e1d49cc15 f2ed538aa0d51fd76c61f58fda9a63810b044e5b Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1759800938 -0500	commit: "Fin pruebas solo fast api"
+f2ed538aa0d51fd76c61f58fda9a63810b044e5b 76cdac1a21855fcfd80baafd48890a2ca0c9f62f Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1759800951 -0500	checkout: moving from FastApi-Try to main
+76cdac1a21855fcfd80baafd48890a2ca0c9f62f 08245f172559455279df26ec742900882e0861d5 Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1760208256 -0500	commit: "Creacion diferentes componentes en Angular"
+08245f172559455279df26ec742900882e0861d5 08245f172559455279df26ec742900882e0861d5 Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1760208326 -0500	checkout: moving from main to Only-Angular
+08245f172559455279df26ec742900882e0861d5 08245f172559455279df26ec742900882e0861d5 Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1760208628 -0500	checkout: moving from Only-Angular to Only-Angular
+08245f172559455279df26ec742900882e0861d5 07c12d3c3d517ecd8623484ecdf6b2b7b0191fbd Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1760213832 -0500	commit: "creando plantilla del frontend"
+07c12d3c3d517ecd8623484ecdf6b2b7b0191fbd 2d89a6c4de8f155ac6e90810c10d6f5114955e5e Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1760671735 -0500	commit: "Inicio formulario agregar proceso"
+2d89a6c4de8f155ac6e90810c10d6f5114955e5e 178b68c4efd575e849e1bca91d478263750859a1 Jhonnfraf <147097991+Jhonnfraf@users.noreply.github.com> 1761187153 -0500	commit: "Agregar funcionalidad para agregar proceso"

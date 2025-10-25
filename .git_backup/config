@@ -1,0 +1,24 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/Jhonnfraf/PID-aplicacion-Sistemas-Operativos.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+	vscode-merge-base = origin/main
+[branch "FastApi-Try"]
+	remote = origin
+	merge = refs/heads/FastApi-Try
+	vscode-merge-base = origin/FastApi-Try
+[branch "Only-Angular"]
+	remote = origin
+	merge = refs/heads/Only-Angular
+	github-pr-base-branch = "Jhonnfraf#PID-aplicacion-Sistemas-Operativos#main"
+	vscode-merge-base = origin/Only-Angular
+	vscode-merge-base = origin/main
