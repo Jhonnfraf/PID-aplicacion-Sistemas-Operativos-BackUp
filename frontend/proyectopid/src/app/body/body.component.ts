@@ -2,6 +2,9 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Proceso, StaticDataService } from '../data/static-data.service';
+import { GraficaComponent } from '../grafica/grafica.component';
+
+import { GraficaControlService } from '../services/grafica-control.service';
 
 import { FormsModule } from '@angular/forms';
 
@@ -9,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-body',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, GraficaComponent],
   templateUrl: './body.component.html',
   styleUrl: './body.component.css',
   standalone: true,
@@ -42,7 +45,7 @@ export class BodyComponent implements OnInit {
   showCambiarEstado = false;
   validationError: string|null = null;
 
-  constructor() {}
+  constructor(private control: GraficaControlService) {}
 
   ngOnInit() {
   }
@@ -182,4 +185,13 @@ export class BodyComponent implements OnInit {
       this.cerrarCambiarEstado();
     }
   }  
+
+  //Metodo para iniciar la simulacion
+  start() {
+    this.control.start();
+  }
+
+  stop(){
+    this.control.stop();
+  }
 }

@@ -106,6 +106,7 @@
                 </div>
             </div>
         </div>
+        <app-grafica></app-grafica>
         
     </div>
     <div class="body-container-right">
@@ -113,11 +114,11 @@
         <div>
             <h2>Controles de Simulación</h2>
             <div class="control-buttons">
-                <button class="control-btn start-btn">
+                <button class="control-btn start-btn" (click)="start()">
                     <span class="btn-icon">▶</span>
                     Iniciar
                 </button>
-                <button class="control-btn stop-btn">
+                <button class="control-btn stop-btn" (click)="stop()">
                     <span class="btn-icon">⏹</span>
                     Detener
                 </button>
