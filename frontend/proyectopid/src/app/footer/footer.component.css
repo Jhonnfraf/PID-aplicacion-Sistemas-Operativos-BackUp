@@ -32,12 +32,29 @@
 }
 
 .status-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #6c757d;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
+  transition: background-color 0.3s ease;
 }
 
+/* Estado: iniciado */
+.status-dot.running {
+  background-color: #28a745; /* verde */
+}
+
+/* Estado: detenido */
+.status-dot.stopped {
+  background-color: #dc3545; /* rojo */
+}
+
+.status-badge.running {
+  background-color: #28a745;
+}
+
+.status-badge.stopped {
+  background-color: #dc3545;
+}
 .status-badge {
   background-color: #6c757d;
   color: white;

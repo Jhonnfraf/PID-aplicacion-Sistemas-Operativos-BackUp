@@ -45,17 +45,11 @@ export class BodyComponent implements OnInit {
   showCambiarEstado = false;
   validationError: string|null = null;
 
-  constructor(private control: GraficaControlService) {}
+  constructor(public control: GraficaControlService) {}
 
   ngOnInit() {
   }
 
-  //logica para asignar nuevo PID
-  asignarNuevoPid(): number {
-    const procesos = this.staticDataService.getProcesos();
-    const maxPid = procesos.reduce((max, p) => p.pid > max ? p.pid : max, 0);
-    return maxPid + 1;
-  }
 
   //metodo para agregar proceso
   
@@ -105,7 +99,7 @@ export class BodyComponent implements OnInit {
 
   addProceso(proceso: Proceso) {
     if (this.validacionesProceso(proceso)) {
-      proceso.pid = this.asignarNuevoPid();
+      proceso.pid = this.staticDataService.asignarNuevoPid();
       this.staticDataService.addProceso(proceso);
       console.log("Proceso agregado:", proceso);
       this.closeAddProcesoNuevo();
@@ -193,5 +187,25 @@ export class BodyComponent implements OnInit {
 
   stop(){
     this.control.stop();
+    
+    // Marcar procesos en 'ejecutando' como 'bloqueado'
+    const procesos = this.staticDataService.procesos;
+    const ejecutando = procesos.filter(p => p.estado === 'inactivo');
+    
+    for (const proc of ejecutando) {
+      proc.estado = 'bloqueado';
+      console.log(`Proceso marcado como bloqueado: ${proc.nombre} (PID: ${proc.pid})`);
+    }
+    
+    // Después de 5 segundos, restaurar a 'listo'
+    setTimeout(() => {
+      for (const proc of ejecutando) {
+        const p = procesos.find(x => x.pid === proc.pid);
+        if (p && p.estado === 'bloqueado') {
+          p.estado = 'listo';
+          console.log(`Proceso restaurado a listo: ${p.nombre} (PID: ${p.pid})`);
+        }
+      }
+    }, 2000);
   }
 }

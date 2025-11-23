@@ -51,7 +51,7 @@
     <br>
 
     <!-- 🔴 Bloqueado -->
-    <h3 class="titulo-bloqueado">Procesos Suspendido</h3>
+    <!-- <h3 class="titulo-bloqueado">Procesos Suspendido</h3>
     <table class="process-table">
     
     <tbody>
@@ -64,7 +64,7 @@
         <td>{{ proceso.tiempoEjecucion }}ms</td>
         </tr>
     </tbody>
-    </table>
+    </table> -->
 
     <h3 class="titulo-bloqueado" style="padding-top: 25px;">Procesos Inactivos</h3>
     <table class="process-table">
@@ -92,21 +92,22 @@
                     <div class="stat-item">
                         <span class="stat-label">CPU Total:</span>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-fill" [style.width.%]="(control.cpuAvg$ | async) || 0"></div>
                         </div>
-                        <span class="stat-value">0.0%</span>
+                        <span class="stat-value">{{ ((control.cpuAvg$ | async) || 0) | number:'1.0-1' }}%</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Memoria Total:</span>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-fill" [style.width.%]="(control.memAvg$ | async) || 0"></div>
                         </div>
-                        <span class="stat-value">0.0%</span>
+                        <span class="stat-value">{{ ((control.memAvg$ | async) || 0) | number:'1.0-1' }}%</span>
                     </div>
                 </div>
             </div>
+            <app-grafica></app-grafica>
         </div>
-        <app-grafica></app-grafica>
+        
         
     </div>
     <div class="body-container-right">

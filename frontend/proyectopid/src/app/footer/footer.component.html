@@ -2,32 +2,46 @@
 <div class="footer-container">
     <div class="footer-container-left">
         <div class="status-indicator">
-            <div class="status-dot"></div>
-            <span class="status-badge">Estado: Detenido</span>
+        <!-- Punto indicador -->
+            <div class="status-dot"
+                [ngClass]="{
+                    'running': (control.lastAction$ | async) === 'started',
+                    'stopped': (control.lastAction$ | async) !== 'started'
+                }">
+            </div>
+
+        <!-- Badge del estado -->
+            <span class="status-badge"
+                    [ngClass]="{
+                    'running': (control.lastAction$ | async) === 'started',
+                    'stopped': (control.lastAction$ | async) !== 'started'
+                    }">
+                Estado: {{ (control.lastAction$ | async) === 'started' ? 'Iniciado' : 'Detenido' }}
+            </span>
         </div>
         <div class="info-item">
             <span class="info-label">Tiempo:</span>
-            <span class="info-value">0.000s</span>
+            <span class="info-value">{{ (control.elapsedTime$ | async) || 0 }}s</span>
         </div>
         <div class="info-item">
             <span class="info-label">Procesos:</span>
-            <span class="info-value">5</span>
+            <span class="info-value">{{ staticDataS.getNumProcesos() }}</span>
         </div>
     </div>
     <div class="footer-container-right">
         <div class="progress-item">
             <span class="progress-label">CPU:</span>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 0%"></div>
+                <div class="progress-fill" [style.width.%]="(control.cpuAvg$ | async) || 0"></div>
             </div>
-            <span class="progress-value">0.0%</span>
+            <span class="progress-value">{{ ((control.cpuAvg$ | async) || 0) | number:'1.0-1' }}%</span>
         </div>
         <div class="progress-item">
             <span class="progress-label">Memoria:</span>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 0%"></div>
+                <div class="progress-fill" [style.width.%]="(control.memAvg$ | async) || 0"></div>
             </div>
-            <span class="progress-value">0.0%</span>
+            <span class="progress-value">{{ ((control.memAvg$ | async) || 0) | number:'1.0-1' }}%</span>
         </div>
     </div>
 </div>
