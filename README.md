@@ -4,6 +4,18 @@
 - Stiven Cadena
 - Sara Guevara
 
+# Como instalar
+1. Clonar repositorio en el pc
+2. Entrar a Frontend/proyectoPid
+3. Ejecutar:
+```bash
+npm install
+```
+4. Ejecutar:
+```bash
+ng serve
+```
+
 # PID-aplicacion-Sistemas-Operativos
 Creacion de la aplicacion para el manejo de memoria con el tema propuesto de PID, con una api en python y frontend en Angular
 
